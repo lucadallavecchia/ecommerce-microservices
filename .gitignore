@@ -37,3 +37,11 @@ gradle-app.setting
 gradlew
 gradlew.bat
 gradle/
+
+# MacOS system files
+.DS_Store
+
+# Build output
+/build
+/target
+/buildSrc
