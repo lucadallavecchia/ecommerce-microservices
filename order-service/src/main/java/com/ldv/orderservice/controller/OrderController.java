@@ -1,5 +1,6 @@
 package com.ldv.orderservice.controller;
 
+import com.ldv.orderservice.exception.OrderNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,8 @@ public class OrderController {
     }
 
     @GetMapping(path = "/{orderId}")
-    public void getOrderById(@PathVariable Long orderId) {
-
+    public void getOrderById(@PathVariable Long orderId) throws OrderNotFoundException {
+        throw new OrderNotFoundException(orderId);
     }
 
 }
