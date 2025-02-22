@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/order-service/v1/orders")
 public class OrderController {
 
-
     @GetMapping
     public void getAllOrders() {
-
+        //TODO
     }
 
     @GetMapping(path = "/{orderId}")
