@@ -1,4 +1,4 @@
-rootProject.name = 'order-product-service'
+rootProject.name = 'ecommerce-microservices'
 
 include(':product-service')
 include(':order-service')
