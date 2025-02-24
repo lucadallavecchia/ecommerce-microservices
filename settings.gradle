@@ -1,0 +1,6 @@
+rootProject.name = 'ecommerce-microservices'
+
+include 'order-service', 'product-service'
+
+project(':order-service').projectDir = file('order-service')
+project(':product-service').projectDir = file('product-service')
