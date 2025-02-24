@@ -2,5 +2,8 @@
 A simple microservices responsible of the management of products
 
 
-- **Group**: `com.example`
-- **Version**: `1.0.0`
+## Project Info
+<!-- START_VERSION -->
+- **Group:** com.ldv.productservice
+- **Version:** 1.0.1
+<!-- END_VERSION -->
