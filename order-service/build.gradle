@@ -4,6 +4,9 @@ plugins {
     id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
 }
 
+group = 'com.ldv.orderservice'
+version = "${majorVersion}.${minorVersion}.${patchVersion}"
+
 repositories {
     mavenCentral()
 }
