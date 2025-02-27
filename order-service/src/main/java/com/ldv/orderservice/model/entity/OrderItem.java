@@ -1,4 +1,4 @@
-package com.ldv.orderservice.model;
+package com.ldv.orderservice.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
