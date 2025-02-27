@@ -8,6 +8,7 @@ class OrderServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		//NO-OP
 	}
 
 }

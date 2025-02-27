@@ -1,7 +1,7 @@
-package com.ldv.orderservice.mapper;
+package com.ldv.orderservice.model.mapper;
 
-import com.ldv.orderservice.dto.OrderDto;
-import com.ldv.orderservice.model.Order;
+import com.ldv.orderservice.model.dto.OrderDto;
+import com.ldv.orderservice.model.entity.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

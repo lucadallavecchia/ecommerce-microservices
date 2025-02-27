@@ -1,8 +1,8 @@
 package com.ldv.orderservice.adapter;
 
-import com.ldv.orderservice.dto.OrderDto;
-import com.ldv.orderservice.mapper.OrderMapper;
-import com.ldv.orderservice.model.Order;
+import com.ldv.orderservice.model.dto.OrderDto;
+import com.ldv.orderservice.model.mapper.OrderMapper;
+import com.ldv.orderservice.model.entity.Order;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package com.ldv.orderservice.dto;
+package com.ldv.orderservice.model.dto;
 
 import lombok.Data;
 

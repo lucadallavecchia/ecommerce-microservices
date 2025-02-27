@@ -1,7 +1,7 @@
-package com.ldv.orderservice.mapper;
+package com.ldv.orderservice.model.mapper;
 
-import com.ldv.orderservice.dto.OrderItemDto;
-import com.ldv.orderservice.model.OrderItem;
+import com.ldv.orderservice.model.dto.OrderItemDto;
+import com.ldv.orderservice.model.entity.OrderItem;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
