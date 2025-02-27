@@ -8,12 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Data
 @Entity
 @Table(name = "orders")
 public class Order {
