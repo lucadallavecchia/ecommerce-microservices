@@ -18,10 +18,12 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    private Long productId; // product reference
-    private int quantity; // number of products
-    private BigDecimal priceAtOrder; // price defined when order was done
+
+    private Long productId; // Riferimento al prodotto
+    private int quantity; // Quantità del prodotto
+    private BigDecimal priceAtOrder; // Prezzo al momento dell'ordine
 }
