@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map handleOrderNotFoundException(ProductNotFoundException ex) {
+    public Map<String, String> handleOrderNotFoundException(ProductNotFoundException ex) {
         return error(ex.getMessage());
     }
 
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
      * @param message
      * @return a map with a message attribute.
      */
-    private Map error(String message) {
+    private Map<String, String> error(String message) {
         LOGGER.error(message);
         return Collections.singletonMap("message", message);
     }
