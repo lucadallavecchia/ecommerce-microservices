@@ -1,20 +1,26 @@
 package com.ldv.orderservice.adapter;
 
-import com.ldv.orderservice.model.dto.OrderDto;
-import com.ldv.orderservice.model.mapper.OrderMapper;
-import com.ldv.orderservice.model.entity.Order;
+import com.ldv.orderservice.client.ProductProxy;
+import com.ldv.orderservice.model.dto.ProductDto;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class OrderAdapter {
 
-    private final OrderMapper orderMapper;
+    private final ProductProxy productProxy;
 
-    public OrderAdapter(final OrderMapper orderMapper){
-        this.orderMapper= orderMapper;
+    public OrderAdapter(final ProductProxy productProxy) {
+        this.productProxy = productProxy;
     }
 
-    public OrderDto toOrderDto(Order order){
-            return orderMapper.orderToOrderDto(order);
+    public ProductDto getProduct(Long productId) {
+        return productProxy.getProductById(productId);
     }
+
+    public List<ProductDto> getProducts(List<Long> productIds) {
+        return productProxy.getProductsByIds(productIds);
+    }
+
 }

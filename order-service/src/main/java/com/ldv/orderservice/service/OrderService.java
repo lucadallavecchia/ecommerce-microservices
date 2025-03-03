@@ -12,4 +12,5 @@ public interface OrderService {
     List<Order> getOrdersByCustomerId(Long customerId);
     List<Order> getOrdersWithTotalPriceAbove(BigDecimal price);
     OrderDto getOrderById(Long orderId) throws OrderNotFoundException;
+    OrderDto createOrder(OrderDto orderDto);
 }
