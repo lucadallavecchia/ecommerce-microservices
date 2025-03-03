@@ -21,7 +21,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, String> handleOrderNotFoundException(ProductNotFoundException ex) {
+    public Map<String, String> handleProductNotFoundException(ProductNotFoundException ex) {
+        return error(ex.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return error(ex.getMessage());
     }
 
