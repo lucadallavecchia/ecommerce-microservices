@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "orders")
+@ToString(exclude = "items")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
