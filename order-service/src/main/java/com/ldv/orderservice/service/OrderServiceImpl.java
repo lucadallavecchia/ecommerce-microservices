@@ -57,16 +57,17 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderDto createOrder(OrderDto orderDto) {
 
-        List<Long> productsIds = orderDto.getItems().stream().map(orderItemDto -> orderItemDto.getProductId()).toList();
+        List<Long> productsIds = orderDto.getItems().stream().map(OrderItemDto::getProductId).toList();
         List<ProductDto> productsDtos = !productsIds.isEmpty() ? orderAdapter.getProducts(productsIds) : Collections.emptyList();
 
         if (validateOrder(orderDto.getItems(), productsDtos)) {
-            //create order in a table
+            //create order/orderItems in a table
             return orderMapper.orderToOrderDto(
                     orderRepository.save(
-                            configureOrderItems(orderDto)
+                            this.configureOrderItems(orderDto)
                     )
             );
+
             //update product stocks
         }
         return null;
@@ -96,9 +97,14 @@ public class OrderServiceImpl implements OrderService {
                 });
     }
 
-    private Order configureOrderItems(OrderDto orderDto){
+    /***
+     * Enforce the assignment of the order reference.
+     * @param orderDto
+     * @return Order
+     */
+    private Order configureOrderItems(OrderDto orderDto) {
         Order order = orderMapper.orderDtoToOrder(orderDto);
-        for(OrderItem item: order.getItems()){
+        for (OrderItem item : order.getItems()) {
             item.setOrder(order);
         }
         return order;
