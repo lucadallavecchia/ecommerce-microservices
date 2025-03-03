@@ -6,4 +6,9 @@ import lombok.Data;
 public class ProductStockUpdateDto {
     private Long productId;
     private int quantityChange; // Can be positive (restock) or negative (purchase)
+
+    public ProductStockUpdateDto(Long productId, int quantity) {
+        this.productId = productId;
+        this.quantityChange = quantity;
+    }
 }

@@ -7,6 +7,7 @@ import com.ldv.orderservice.model.dto.OrderItemDto;
 import com.ldv.orderservice.model.dto.ProductDto;
 import com.ldv.orderservice.model.entity.Order;
 import com.ldv.orderservice.model.entity.OrderItem;
+import com.ldv.orderservice.model.mapper.OrderItemMapper;
 import com.ldv.orderservice.model.mapper.OrderMapper;
 import com.ldv.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,13 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final OrderItemMapper orderItemMapper;
     private final OrderAdapter orderAdapter;
 
-    public OrderServiceImpl(final OrderRepository orderRepository, final OrderMapper orderMapper, final OrderAdapter orderAdapter) {
+    public OrderServiceImpl(final OrderRepository orderRepository, final OrderMapper orderMapper, final OrderItemMapper orderItemMapper, final OrderAdapter orderAdapter) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.orderItemMapper = orderItemMapper;
         this.orderAdapter = orderAdapter;
     }
 
@@ -56,21 +59,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDto createOrder(OrderDto orderDto) {
-
-        List<Long> productsIds = orderDto.getItems().stream().map(OrderItemDto::getProductId).toList();
+        OrderDto orderCreated = null;
+        List<OrderItemDto> orderItemDtos = orderDto.getItems();
+        List<Long> productsIds = orderItemDtos.stream().map(OrderItemDto::getProductId).toList();
         List<ProductDto> productsDtos = !productsIds.isEmpty() ? orderAdapter.getProducts(productsIds) : Collections.emptyList();
 
         if (validateOrder(orderDto.getItems(), productsDtos)) {
             //create order/orderItems in a table
-            return orderMapper.orderToOrderDto(
+            orderCreated = orderMapper.orderToOrderDto(
                     orderRepository.save(
                             this.configureOrderItems(orderDto)
                     )
             );
-
             //update product stocks
+            orderAdapter.updateProductStock(orderItemMapper.orderItemDtoListToProductStockUpdateDtoList(orderItemDtos));
         }
-        return null;
+        return orderCreated;
     }
 
     /***
