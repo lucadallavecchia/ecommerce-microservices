@@ -18,7 +18,7 @@ public interface ProductProxy {
     @GetMapping("/api/product-service/v1/products/{productId}")
     ProductDto getProductById(@PathVariable("productId") Long productId);
 
-    @GetMapping("/api/product-service/v1/products")
+    @GetMapping("/api/product-service/v1/products/by-ids")
     List<ProductDto> getProductsByIds(@RequestParam List<Long> productIds);
 
     @PutMapping("/api/product-service/v1/products/stock")

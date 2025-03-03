@@ -36,6 +36,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getAllProducts() {
+        return productMapper.productsToProductDtos(productRepository.findAll());
+    }
+
+    @Override
     @Transactional
     public void updateProductStock(List<ProductStockUpdateDto> stockUpdates) throws ProductNotFoundException {
         Map<Long, Product> productMap = productRepository
