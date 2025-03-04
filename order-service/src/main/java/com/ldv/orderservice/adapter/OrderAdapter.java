@@ -16,10 +16,6 @@ public class OrderAdapter {
         this.productProxy = productProxy;
     }
 
-    public ProductDto getProduct(Long productId) {
-        return productProxy.getProductById(productId);
-    }
-
     public List<ProductDto> getProducts(List<Long> productIds) {
         return productProxy.getProductsByIds(productIds);
     }

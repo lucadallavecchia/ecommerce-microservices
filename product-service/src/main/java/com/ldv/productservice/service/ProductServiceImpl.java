@@ -25,12 +25,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(Long id) throws ProductNotFoundException {
-        return productMapper.productToProductDto(productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found.")));
-    }
-
-    @Override
     public List<ProductDto> getProductsByIds(List<Long> productIds) {
         return productMapper.productsToProductDtos(productRepository.findAllById(productIds));
     }

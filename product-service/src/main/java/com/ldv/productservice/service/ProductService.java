@@ -8,9 +8,10 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductDto getProductById(Long id) throws ProductNotFoundException;
     List<ProductDto> getProductsByIds(List<Long> productIds);
+
     void updateProductStock(List<ProductStockUpdateDto> stockUpdateDtos) throws ProductNotFoundException;
+
     List<ProductDto> getAllProducts();
 
 }
