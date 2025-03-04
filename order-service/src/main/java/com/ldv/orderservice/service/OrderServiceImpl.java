@@ -13,7 +13,6 @@ import com.ldv.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -36,21 +35,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return List.of();
-    }
-
-    @Override
-    public List<Order> getOrdersByCustomerId(Long customerId) {
-        return List.of();
-    }
-
-    @Override
-    public List<Order> getOrdersWithTotalPriceAbove(BigDecimal price) {
-        return List.of();
-    }
-
-    @Override
     public OrderDto getOrderById(Long orderId) throws OrderNotFoundException {
         return orderMapper.orderToOrderDto(orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found with ID: " + orderId)));
@@ -65,13 +49,13 @@ public class OrderServiceImpl implements OrderService {
         List<ProductDto> productsDtos = !productsIds.isEmpty() ? orderAdapter.getProducts(productsIds) : Collections.emptyList();
 
         if (validateOrder(orderDto.getItems(), productsDtos)) {
-            //create order/orderItems in a table
+            // create order/orderItems in a table
             orderCreated = orderMapper.orderToOrderDto(
                     orderRepository.save(
                             this.configureOrderItems(orderDto)
                     )
             );
-            //update product stocks
+            // update product stocks
             orderAdapter.updateProductStock(orderItemMapper.orderItemDtoListToProductStockUpdateDtoList(orderItemDtos));
         }
         return orderCreated;
