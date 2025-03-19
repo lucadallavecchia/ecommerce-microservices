@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.Collections;
 import java.util.Map;
@@ -17,6 +18,13 @@ import java.util.Map;
 @Component
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFoundError(NoHandlerFoundException ex) {
+        return error("No endpoint found for the requested URL. Please check the API documentation and try again.");
+    }
 
     @ExceptionHandler(OrderNotFoundException.class)
     @ResponseBody
