@@ -30,17 +30,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getAllProducts() {
-        return productMapper.productsToProductDtos(productRepository.findAll());
-    }
-
-    @Override
     @Transactional
     public void updateProductStock(List<ProductStockUpdateDto> stockUpdates) throws ProductNotFoundException {
-        Map<Long, Product> productMap = productRepository
-                .findAllById(stockUpdates.stream().map(ProductStockUpdateDto::getProductId).toList())
-                .stream()
-                .collect(Collectors.toMap(Product::getId, product -> product));
+        Map<Long, Product> productMap = productRepository.findAllById(stockUpdates.stream().map(ProductStockUpdateDto::getProductId).toList()).stream().collect(Collectors.toMap(Product::getId, product -> product));
 
         for (ProductStockUpdateDto stockUpdate : stockUpdates) {
             Product product = productMap.get(stockUpdate.getProductId());
@@ -58,4 +50,16 @@ public class ProductServiceImpl implements ProductService {
 
         productRepository.saveAll(productMap.values());
     }
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        return productMapper.productsToProductDtos(productRepository.findAll());
+    }
+
+    @Override
+    public ProductDto createProduct(ProductDto productDto) {
+        Product savedProduct = productRepository.save(productMapper.productDtoToProduct(productDto));
+        return productMapper.productToProductDto(savedProduct);
+    }
+
 }
