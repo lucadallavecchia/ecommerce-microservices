@@ -19,7 +19,7 @@ You can import them into Postman to easily test the microservices.
 
 The microservices expose the following Swagger UI endpoints:
 
-- **Product Service** → [http://localhost:8081/swagger-ui/](http://localhost:8081/swagger-ui/)
-- **Order Service** → [http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/)
+- **Product Service** → [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
+- **Order Service** → [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 Each service provides a detailed OpenAPI specification for testing and interacting with the available endpoints.
