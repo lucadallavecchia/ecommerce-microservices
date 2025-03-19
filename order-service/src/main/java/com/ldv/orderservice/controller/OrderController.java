@@ -3,6 +3,7 @@ package com.ldv.orderservice.controller;
 import com.ldv.orderservice.model.dto.OrderDto;
 import com.ldv.orderservice.exception.OrderNotFoundException;
 import com.ldv.orderservice.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody @Valid OrderDto orderDto) {
         OrderDto createdOrder = orderService.createOrder(orderDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
     }
