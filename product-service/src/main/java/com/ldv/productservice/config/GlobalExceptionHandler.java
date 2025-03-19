@@ -2,19 +2,22 @@ package com.ldv.productservice.config;
 
 import ch.qos.logback.classic.Logger;
 import com.ldv.productservice.exception.ProductNotFoundException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @ControllerAdvice
 @Component
@@ -28,21 +31,31 @@ public class GlobalExceptionHandler {
         return error("No endpoint found for the requested URL. Please check the API documentation and try again.");
     }
 
-    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public Map<String, String> handleMissingParameterException(MissingServletRequestParameterException ex) {
-        LOGGER.error("Missing request parameter: {}", ex.getParameterName());
-        return Collections.singletonMap("error", "Missing required parameter: " + ex.getParameterName());
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+        return errors;
     }
 
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public Map<String, String> handleTypeMismatchException(MethodArgumentTypeMismatchException ex) {
-        LOGGER.error("Invalid parameter type: {}", ex.getName());
-        return Collections.singletonMap("error", "Invalid parameter type for: " + ex.getName());
+    public Map<String, String> handleConstraintViolationException(ConstraintViolationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+
+        for (ConstraintViolation<?> violation : violations) {
+            String fieldName = violation.getPropertyPath().toString(); // Ottiene il nome del campo
+            String errorMessage = violation.getMessage();
+            errors.put(fieldName, errorMessage);
+        }
+
+        return errors;
     }
+
 
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseBody
