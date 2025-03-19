@@ -4,12 +4,15 @@ import com.ldv.productservice.model.dto.ProductDto;
 import com.ldv.productservice.exception.ProductNotFoundException;
 import com.ldv.productservice.model.dto.ProductStockUpdateDto;
 import com.ldv.productservice.service.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -40,6 +43,13 @@ public class ProductController {
     public ResponseEntity<Void> updateProductStock(@RequestBody List<ProductStockUpdateDto> stockUpdateDtos) throws ProductNotFoundException {
         productService.updateProductStock(stockUpdateDtos);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+        ProductDto createdProduct = productService.createProduct(productDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
 
