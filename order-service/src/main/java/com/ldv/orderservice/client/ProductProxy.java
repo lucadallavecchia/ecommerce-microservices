@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "product", url = "localhost:8081")
+@FeignClient(name = "productProxy", url = "localhost:8081", configuration = ProductProxyConfig.class)
 public interface ProductProxy {
 
     @GetMapping("/api/product-service/v1/products/by-ids")

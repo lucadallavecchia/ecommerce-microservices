@@ -1,7 +1,10 @@
 package com.ldv.orderservice.config;
 
 import ch.qos.logback.classic.Logger;
+import com.ldv.orderservice.exception.BadRequestException;
+import com.ldv.orderservice.exception.InternalServerException;
 import com.ldv.orderservice.exception.OrderNotFoundException;
+import com.ldv.orderservice.exception.ResourceNotFoundException;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -46,6 +49,27 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleOrderNotFoundException(OrderNotFoundException ex) {
+        return error(ex.getMessage());
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handleBadRequestException(BadRequestException ex) {
+        return error(ex.getMessage());
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handleInternalServerException(InternalServerException ex) {
+        return error(ex.getMessage());
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return error(ex.getMessage());
     }
 
