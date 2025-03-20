@@ -10,8 +10,9 @@ A simple microservices architecture for managing orders and products, demonstrat
 
 ## 📂 Postman Collection
 Postman collections for API testing are available in the `postman/`folder of each module:
-* [`order-service/postman/`](order-service/postman/)
-* [`product-service/postman/`](product-service/postman/)
+
+- **Product Service** → [`product-service/postman/`](product-service/postman/)
+- **Order Service** →[`order-service/postman/`](order-service/postman/)
 
 You can import them into Postman to easily test the microservices. 
 
