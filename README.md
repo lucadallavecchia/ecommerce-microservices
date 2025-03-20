@@ -23,3 +23,18 @@ The microservices expose the following Swagger UI endpoints:
 - **Order Service** → [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 Each service provides a detailed OpenAPI specification for testing and interacting with the available endpoints.
+
+## ⚙️ Actuator Endpoints
+Spring Boot Actuator is enabled to provide monitoring and management capabilities. The following actuator endpoints are available:
+
+**Product Service**
+
+- Health: http://localhost:8081/actuator/health
+- Metrics: http://localhost:8081/actuator/metrics
+- Server Requests: http://localhost:8081/actuator/metrics/http.server.requests
+
+**Order Service**
+
+- Health: http://localhost:8080/actuator/health
+- Metrics: http://localhost:8080/actuator/metrics
+- Server Requests: http://localhost:8080/actuator/metrics/http.server.requests
