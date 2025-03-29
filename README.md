@@ -3,10 +3,10 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ REST Controllers  
 ✅ Spring Data JPA  
 ✅ Feign Client  
-🚧  Spring Cloud Config  
+✅ Spring Cloud Config  
 🚧 API Gateway  
-🚧  Eureka  
-🚧  Logging & Tracing
+🚧 Eureka  
+🚧 Logging & Tracing
 
 ## 📂 Postman Collection
 Postman collections for API testing are available in the `postman/`folder of each module:
@@ -14,7 +14,7 @@ Postman collections for API testing are available in the `postman/`folder of eac
 - **Product Service** → [`product-service/postman/`](product-service/postman/)
 - **Order Service** →[`order-service/postman/`](order-service/postman/)
 
-You can import them into Postman to easily test the microservices. 
+You can import them into Postman to easily test the microservices.
 
 ## 📜 Swagger API Documentation
 
@@ -39,3 +39,14 @@ Spring Boot Actuator is enabled to provide monitoring and management capabilitie
 - Health: http://localhost:8080/actuator/health
 - Metrics: http://localhost:8080/actuator/metrics
 - Server Requests: http://localhost:8080/actuator/metrics/http.server.requests
+
+## 🔧 Spring Cloud Config
+Spring Cloud Config is used to manage external configurations for the microservices, allowing centralized configuration management. The **Config Server** is running on port `8888` and serves configurations for each microservice.
+
+### Config Server Endpoints:
+- **Order Service Config** → [http://localhost:8888/order-service/default](http://localhost:8888/order-service/default)
+- **Product Service Config** → [http://localhost:8888/product-service/default](http://localhost:8888/product-service/default)
+
+Each service fetches its configuration from the **Config Server** at startup. 
+The configurations are stored in [`config-repo/`](config-repo).
+

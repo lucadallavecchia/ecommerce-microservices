@@ -4,6 +4,7 @@ import com.ldv.orderservice.model.dto.OrderDto;
 import com.ldv.orderservice.exception.OrderNotFoundException;
 import com.ldv.orderservice.service.OrderService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
+
+    @Value("${order-service.customProperty:Default Value}")
+    private String customProperty;
 
     public OrderController(final OrderService orderService) {
         this.orderService = orderService;

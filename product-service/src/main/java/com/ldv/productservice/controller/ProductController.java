@@ -5,6 +5,7 @@ import com.ldv.productservice.exception.ProductNotFoundException;
 import com.ldv.productservice.model.dto.ProductStockUpdateDto;
 import com.ldv.productservice.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,9 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
+
+    @Value("${product-service.customProperty:Default Value}")
+    private String customProperty;
 
     public ProductController(final ProductService productService) {
         this.productService = productService;
