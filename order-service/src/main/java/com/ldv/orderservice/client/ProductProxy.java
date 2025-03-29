@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "productProxy", url = "localhost:8081", configuration = ProductProxyConfig.class)
+// No eureka load balancer configuration
+//@FeignClient(name = "productProxy", url = "localhost:8081", configuration = ProductProxyConfig.class)
+@FeignClient(name = "product-service", configuration = ProductProxyConfig.class)
 public interface ProductProxy {
 
     @GetMapping("/api/product-service/v1/products/by-ids")
