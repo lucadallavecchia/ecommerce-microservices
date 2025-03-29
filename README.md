@@ -4,7 +4,7 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ Spring Data JPA  
 ✅ Feign Client  
 ✅ Spring Cloud Config  
-✅ Eureka - Naming Service  
+✅ Eureka - Naming Service/Load Balancer  
 🚧 API Gateway  
 🚧 Logging & Tracing
 
