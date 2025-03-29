@@ -47,7 +47,7 @@ Spring Boot Actuator is enabled to provide monitoring and management capabilitie
 ## 🔧 Spring Cloud Config
 Spring Cloud Config is used to manage external configurations for the microservices, allowing centralized configuration management. The **Config Server** is running on port `8888` and serves configurations for each microservice.
 
-### Config Server Endpoints:
+Config Server Endpoints:
 - **Order Service Config** → [http://localhost:8888/order-service/default](http://localhost:8888/order-service/default)
 - **Product Service Config** → [http://localhost:8888/product-service/default](http://localhost:8888/product-service/default)
 
