@@ -5,8 +5,25 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ Feign Client  
 ✅ Spring Cloud Config  
 ✅ Eureka - Naming Service/Load Balancer  
-🚧 API Gateway  
+✅ API Gateway  
 🚧 Logging & Tracing
+
+## 🌉 API Gateway Configuration
+The API Gateway (running on port `8765`) provides a single entry point for all microservices with:
+- **Dynamic routing** to backend services
+- **URL path rewriting**
+- **Load balancing** through Eureka
+
+### 🔀 Available Routes
+| Service        | Gateway Path                  | Backend Route                     |
+|----------------|-------------------------------|-----------------------------------|
+| Order Service  | `/api/order-service/**`       | `lb://ORDER-SERVICE/**`           |
+| Product Service| `/api/product-service/**`     | `lb://PRODUCT-SERVICE/**`         |
+
+### 🛠️ Gateway Endpoints
+- **Actuator Routes**: http://localhost:8765/actuator/gateway/routes
+- **Health Check**: http://localhost:8765/actuator/health
+- **Swagger UI**: Available through each service directly
 
 
 ## 📂 Postman Collection
@@ -14,6 +31,7 @@ Postman collections for API testing are available in the `postman/`folder of eac
 
 - **Order Service** →[`order-service/postman/`](order-service/postman/)
 - **Product Service** → [`product-service/postman/`](product-service/postman/)
+- **Api Gateway** → [`api-gateway/postman/`](api-gateway/postman/)
 
 You can import them into Postman to easily test the microservices.
 
@@ -26,6 +44,8 @@ The microservices expose the following Swagger UI endpoints:
 - **Product Service** → [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
 
 Each service provides a detailed OpenAPI specification for testing and interacting with the available endpoints.
+N.B. The use of the Api Gateway postman collection is suggested.
+
 
 
 ## ⚙️ Actuator Endpoints
