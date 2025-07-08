@@ -6,7 +6,9 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ Spring Cloud Config  
 ✅ Eureka - Naming Service/Load Balancer  
 ✅ API Gateway  
-🚧 Logging & Tracing
+🚧 Metrics & Monitoring  
+🚧 Logging & Tracing  
+
 
 ## 🌉 API Gateway Configuration
 The API Gateway (running on port `8765`) provides a single entry point for all microservices with:
@@ -14,13 +16,15 @@ The API Gateway (running on port `8765`) provides a single entry point for all m
 - **URL path rewriting**
 - **Load balancing** through Eureka
 
-### 🔀 Available Routes
+**Available Routes**
+
 | Service        | Gateway Path                  | Backend Route                     |
 |----------------|-------------------------------|-----------------------------------|
 | Order Service  | `/api/order-service/**`       | `lb://ORDER-SERVICE/**`           |
 | Product Service| `/api/product-service/**`     | `lb://PRODUCT-SERVICE/**`         |
 
-### 🛠️ Gateway Endpoints
+**Gateway Endpoints**
+
 - **Actuator Routes**: http://localhost:8765/actuator/gateway/routes
 - **Health Check**: http://localhost:8765/actuator/health
 - **Swagger UI**: Available through each service directly
@@ -45,7 +49,6 @@ The microservices expose the following Swagger UI endpoints:
 
 Each service provides a detailed OpenAPI specification for testing and interacting with the available endpoints.
 N.B. The use of the Api Gateway postman collection is suggested.
-
 
 
 ## ⚙️ Actuator Endpoints
@@ -83,3 +86,37 @@ Each microservice is registered with Eureka, allowing automatic service discover
 
 Eureka dashboard is available at: http://localhost:8761
 
+
+## 📊 Metrics & Monitoring
+Prometheus and Grafana are used to collect and visualize application metrics exposed via Micrometer.
+
+**Starting via Docker**
+
+You can start both Prometheus and Grafana using the provided `docker-compose.yml` file located at [`docker-local/`](docker-local/):
+
+```bash 
+  docker-compose -f docker-local/docker-compose.yml up
+```
+(common issue: missing "execute" permissions to the content of the _docker-local_ folder)
+
+**Urls**
+
+| Service    | Url                   | 
+|------------|-----------------------|
+| Prometheus | http://localhost:9090 |
+| Grafana    | http://localhost:3000 |
+
+**Prometheus**
+
+To check the proper integration service-prometheus: http://localhost:9090/targets
+To play with some metrics http://localhost:9090/query
+
+**Grafana**
+
+First login:
+- username: _admin_
+- password: _admin_   
+
+You need to add a new datasource: select _prometheus_  
+Configure the endpoint: _http://prometheus:9090_    
+Define an update interval: _Scrape interval 2s_  
