@@ -7,7 +7,8 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ Eureka - Naming Service/Load Balancer  
 ✅ API Gateway  
 ✅ Metrics & Monitoring  
-🚧 Logging & Tracing  
+🚧 Logging & Tracing
+🚧 Performance Tests  
 
 
 ## 🌉 API Gateway Configuration
