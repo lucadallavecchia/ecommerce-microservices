@@ -6,7 +6,7 @@ A simple microservices architecture for managing orders and products, demonstrat
 ✅ Spring Cloud Config  
 ✅ Eureka - Naming Service/Load Balancer  
 ✅ API Gateway  
-🚧 Metrics & Monitoring  
+✅ Metrics & Monitoring  
 🚧 Logging & Tracing  
 
 
@@ -59,12 +59,14 @@ Spring Boot Actuator is enabled to provide monitoring and management capabilitie
 - Health: http://localhost:8080/actuator/health
 - Metrics: http://localhost:8080/actuator/metrics
 - Server Requests: http://localhost:8080/actuator/metrics/http.server.requests
+- Prometheus: http://localhost:8080/actuator/prometheus
 
 **Product Service**
 
 - Health: http://localhost:8081/actuator/health
 - Metrics: http://localhost:8081/actuator/metrics
 - Server Requests: http://localhost:8081/actuator/metrics/http.server.requests
+- Prometheus: http://localhost:8081/actuator/prometheus
 
 
 ## 🔧 Spring Cloud Config
@@ -113,10 +115,20 @@ To play with some metrics http://localhost:9090/query
 
 **Grafana**
 
-First login:
-- username: _admin_
-- password: _admin_   
+To be able to use Gragana you need to do an initial configuration:First login:
 
-You need to add a new datasource: select _prometheus_  
-Configure the endpoint: _http://prometheus:9090_    
-Define an update interval: _Scrape interval 2s_  
+****First login:****
+* username: _admin_
+* password: _admin_   
+
+****Datasource configuration:****
+* You need to add a new datasource: select _prometheus_  
+* Configure the endpoint: _http://prometheus:9090_    
+* Define an update interval: _Scrape interval 2s_  
+
+****Import/Create dashboar:****
+1. In grafana select: _hamburger menu_(top left corner) -> _Dashboards_
+2. In the dashboard area select: _New_ (top right corner) -> _Import_
+3. Use the grafana dashboard id _10280_ (Spring Boot 2.1 Statistics)
+
+After completing this configuration, you'll see a panel titled HTTP Statistics displaying all the performed requests.
